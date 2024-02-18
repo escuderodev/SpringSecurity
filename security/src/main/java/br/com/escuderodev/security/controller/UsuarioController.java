@@ -1,5 +1,7 @@
 package br.com.escuderodev.security.controller;
 
+import br.com.escuderodev.security.domain.produto.DadosAtualizaProduto;
+import br.com.escuderodev.security.domain.usuario.DadosAtualizaUsuario;
 import br.com.escuderodev.security.domain.usuario.DadosCadastroUsuario;
 import br.com.escuderodev.security.domain.usuario.DadosListagemUsuario;
 import br.com.escuderodev.security.service.UsuarioService;
@@ -39,6 +41,13 @@ public class UsuarioController {
         var usuario = service.create(dados);
         var uri = uriBuilder.path("produto/{id}").buildAndExpand(usuario.getId()).toUri();
         return ResponseEntity.created(uri).body(usuario);
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity update(@RequestBody @Valid DadosAtualizaUsuario dados) {
+        service.update(dados);
+        return ResponseEntity.ok(dados);
     }
 
     @DeleteMapping("/{id}")

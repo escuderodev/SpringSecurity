@@ -1,5 +1,6 @@
 package br.com.escuderodev.security.service;
 
+import br.com.escuderodev.security.domain.usuario.DadosAtualizaUsuario;
 import br.com.escuderodev.security.domain.usuario.DadosCadastroUsuario;
 import br.com.escuderodev.security.domain.usuario.DadosListagemUsuario;
 import br.com.escuderodev.security.domain.usuario.Usuario;
@@ -28,6 +29,12 @@ public class UsuarioService {
     public Usuario create(DadosCadastroUsuario dados) {
         var usuario = new Usuario(dados);
         return repository.save(usuario);
+    }
+
+    public Usuario update(DadosAtualizaUsuario dados) {
+        var usuario = repository.getReferenceById(dados.id());
+        usuario.atualizaDados(dados);
+        return usuario;
     }
 
     public void delete(Long id) {

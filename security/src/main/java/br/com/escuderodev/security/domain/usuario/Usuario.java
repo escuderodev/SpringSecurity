@@ -73,4 +73,9 @@ public class Usuario implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public void atualizaDados(DadosAtualizaUsuario dados) {
+        this.password = dados.password();
+        this.role = dados.role();
+    }
 }
